@@ -333,14 +333,7 @@
 					<div class="form-group">
                         <div class="col"><label style="margin-left:70px"><strong>Amount Sanctioned:&nbsp;</strong></label><input name="Amount_Sanctioned" type="text" style="padding-bottom:6px;width:200px;"><label style="padding-left:75px;"><strong>Amount Sanctioned(in words):&nbsp;</strong></label><input type="text" name="Amount_Sanctioned_words" style="padding-bottom:6px;width:300px;"></div>
 					</div>
-					<div class="form-group">
 					
-					
-					
-					
-						<div class="col"><label style="margin-left:70px"><strong>Select image to upload:&nbsp;</strong></label><input type="file"  name="fileToUpload" id="fileToUpload"><input type="Submit" class="btn btn-primary" style="padding-left:75px;" value="Upload image" onclick="myfunc();" id="submit" name="submit"></div>
-					</form>
-					</div>
                       </div>
                       </div>
 					  
@@ -351,10 +344,9 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="button">Cancel</button>
 						  <form method='get' action='mediaid.php'>
-						  
 						  <button class="btn btn-primary" name="pd" id="pd" type="submit">Print</button>
-						  <?php"
-							if(isset($_POST['pd'])){
+						  <?php
+						  if(isset($_POST['pd'])){
 								$conn = mysqli_connect('localhost','root','');
 								mysqli_select_db($conn,'crescent');
 								$Application_No = $_POST['Application_No'];
@@ -364,10 +356,10 @@
 								$query = mysqli_query($conn,"select * from mediaid Where aadhar_id = '$Adhaar_id' ;");
 								$id = mysqli_fetch_array($query);	
 								echo '<script type="text/javascript">window.open("mediaid.php")</script>';
-						  }"
+						  }
 						  ?>
-						  </form>
-                          <button type="submit" name="add" id="add" class="btn btn-success">Submit</button>
+						  </form> 
+						  <button type="submit" name="add" id="add" class="btn btn-success">Submit</button>
 						  
 						  
                         </div>

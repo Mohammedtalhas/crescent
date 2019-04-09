@@ -1,11 +1,8 @@
 <?php
-if(isset($_COOKIE[$cookie_name])) {
-	
-	
 require('fpdf17/fpdf.php');
 $conn = mysqli_connect('localhost','root','');
 mysqli_select_db($conn,'crescent');
-$query = mysqli_query($conn, "SELECT * from mediaid Where Application_No = '$_COOKIE[$cookie_name]';");
+$query = mysqli_query($conn, "SELECT * from mediaid");
 $id = mysqli_fetch_array($query);
 $pdf = new FPDF('P','mm','A4');
 $pdf->AddPage();
@@ -61,5 +58,5 @@ $pdf->Cell(3);
 
 
 $pdf->Output();
-}
+
 ?>
