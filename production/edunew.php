@@ -62,7 +62,7 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a  href="index.php"><img src="images/whitehome.png" height="10%" width="10%"/> HOME </a>
+                  <li><a  href="../index.php"><img src="images/whitehome.png" height="10%" width="10%"/> HOME </a>
                   </li>
                   <li><a><img src="images/white-cross.png" height="10%" width="10%"/> MEDICAL AID</a>
                     <ul class="nav child_menu">
@@ -137,9 +137,7 @@
 
                         <div class="form-group">
                          <div class="form-group">
-                        <div class="col"><label style="margin-left:30px"><strong>Applicant Id:&nbsp;</strong></label>
-						<input type="text" name="Applicant_Id" style="padding-bottom:6px;width:200px;">
-						<label style="padding-left:71px;"><strong>Adhaar No.:&nbsp;</strong></label>
+                        <div class="col"><label style="padding-left:35px;"><strong>Adhaar No.:&nbsp;</strong></label>
 						<input type="text" name="Adhaar_No" style="padding-bottom:6px;width:200px;"></div>
                       </div>
 						<div class="form-group">
@@ -160,6 +158,10 @@
 						<input type="text" name="Mobile_no" style="padding-bottom:6px;width:175px;">
 						<label style="padding-left:74px;"><strong>Address:&nbsp;</strong></label>
 						<input type="text" name="Address" style="padding-bottom:6px;width:210px;"></div>
+					</div>
+					<div class="form-group">
+					
+					<div class="col"><label style="margin-left:6px"><strong>Currently Studied:&nbsp;</strong></label><input type="text" name="Currently" style="padding-bottom:6px;width:180px;"><label style="padding-left:35px;"><strong>Institution Name:&nbsp;</strong></label><input type="text" name="Past_Inst" style="padding-bottom:6px;width:299px;">
 					</div>
                       </div>
                       <div class="form-group">
@@ -241,7 +243,6 @@
 </html>
 
 <?php
-	$Applicant_Id = $_POST['Applicant_Id'];
     $Adhaar_No = $_POST['Adhaar_No'];
     $First_Name = $_POST['First_Name'];
     $Last_Name = $_POST['Last_Name'];
@@ -250,7 +251,9 @@
 	$Father_name= $_POST['Father_name'];
 	$Mobile_No= $_POST['Mobile_no'];
 	$Address = $_POST['Address'];
-    if ( !empty($Applicant_Id) || !empty($Adhaar_No) || !empty($First_Name) || !empty($Last_Name) || !empty($Date_of_birth) || !empty($Age) || !empty($Father_name) || !empty($Mobile_No) || !empty($Address))  {
+	$Currently = $_POST['Currently'];
+	$Past_Inst = $_POST['Past_Inst'];
+    if ( !empty($Adhaar_No) || !empty($First_Name) || !empty($Last_Name) || !empty($Date_of_birth) || !empty($Age) || !empty($Father_name) || !empty($Mobile_No) || !empty($Address) || !empty($Currently) || !empty($Past_Inst))  {
 		$host = "localhost";
         $dbUsername = "root";
         $dbPassword = "";
@@ -260,19 +263,19 @@
         if (mysqli_connect_error()) {
          die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
         } else {
-         $SELECT = "SELECT Applicant_Id From edunew Where Applicant_Id = ? Limit 1";
-         $INSERT = "INSERT Into edunew (Applicant_Id,Adhaar_No, First_Name, Last_Name, Date_of_birth, Age, Father_name, Mobile_No, Address) values(?, ?, ?, ?, ?, ?, ?, ?, ? )";
+         $SELECT = "SELECT Adhaar_No From edunew Where Adhaar_No = ? Limit 1";
+         $INSERT = "INSERT Into edunew (Adhaar_No, First_Name, Last_Name, Date_of_birth, Age, Father_name, Mobile_No, Address, Currently, Past_Inst) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
          //Prepare statement
          $stmt = $conn->prepare($SELECT);
-         $stmt->bind_param("s", $Applicant_Id);
+         $stmt->bind_param("i", $Adhaar_No);
          $stmt->execute();
-         $stmt->bind_result($Applicant_Id);
+         $stmt->bind_result($Adhaar_No);
          $stmt->store_result();
          $rnum = $stmt->num_rows;
          if ($rnum==0) {
           $stmt->close();
           $stmt = $conn->prepare($INSERT);
-          $stmt->bind_param("sssssisss",$Applicant_Id, $Adhaar_No, $First_Name, $Last_Name , $Date_of_birth, $Age, $Father_name, $Mobile_No, $Address);
+          $stmt->bind_param("ssssssssss", $Adhaar_No, $First_Name, $Last_Name , $Date_of_birth, $Age, $Father_name, $Mobile_No, $Address, $Currently, $Past_Inst);
           $stmt->execute();
 		  $text="Inserted Successfully";
 		  echo '<script type="text/javascript">alert("'.$text.'")</script>';

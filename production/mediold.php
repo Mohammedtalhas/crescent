@@ -116,11 +116,9 @@
 		}      
     }
 	function showInput1() {
-		if(document.getElementById("demo1").style.display == "none"){
-			
-			document.getElementById("demo1").style.display = "block";
-		}else{
-			document.getElementById("demo1").style.display = "none";
+		if(document.getElementById("go").onclick = true ){
+			document.forms['demo-form1'].submit();
+			document.getElementById("demo1").style.display = "block"; 
 		}      
     }
 	function myfunc(){
@@ -160,7 +158,7 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a  href="index.php"><img src="images/whitehome.png" height="10%" width="10%"/> HOME </a>
+                  <li><a  href="../index.php"><img src="images/whitehome.png" height="10%" width="10%"/> HOME </a>
                   </li>
                   <li><a><img src="images/white-cross.png" height="10%" width="10%"/> MEDICAL AID</a>
                     <ul class="nav child_menu">
@@ -224,7 +222,7 @@
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for..." name="search" >
                     <span class="input-group-btn">
-                      <button class="btn btn-default" name="go" id="go" type="submit">Go!</button> 
+                      <button class="btn btn-default" name="go" id="go" onclick="showInput1()" type="submit">Go!</button> 
 
                     </span>
                   </div>
@@ -255,34 +253,20 @@
 					<div class="form-group">
                         <label style="padding-left:35px;"><strong>Mobile No.:&nbsp;</strong></label><input type="text" name="Mobile_No" value="<?php echo $Mobile_No;?>" style="padding-bottom:6px;width:200px;"><label style="padding-left:50px;"><strong>Address:&nbsp;</strong></label><input type="text" name="Address" value="<?php echo $Address;?>" style="padding-bottom:6px;width:230px;"><label style="padding-left:55px;"><strong>Town/City: &nbsp;</strong></label><input type="text" name="Town_City" value="<?php echo $Town_City;?>" style="padding-bottom:6px;width:200px;"></div>
 					</div>
-				
-                      </div>
-                      
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button">Cancel</button>
-						  <button class="btn btn-primary" type="button" onclick="showInput1()">Check History</button>
-						  <button type="button" onclick="showInput()" class="btn btn-success">New Application</button>
-                        </div>
-                      </div>
-						
-                  </div>
-				  <span id="demo1" style="display:none;">
+					 <span id="demo1" style="display:block;">
 				  
-					<div class="x_panel">
-					<div class="x_content">
+					
                     <br />
                     
 
-					<table border="5" style="border-collapse: collapse;width: 100%;color: #000000;font-family: monospace;font-size: 20px;text-align: left;">
+					<table border="5" style="border-collapse: collapse;width: 100%;color: #000000;font-family: monospace;font-size: 20px;text-align: center;">
 					 <tr>
-					  <th>Application No.</th> 
-					  <th>Adhaar Id</th> 
-					  <th>Amount Sanctioned</th>
-					  <th>Amount Sanctioned in Words</th>
-					  <th>Details</th>
-					  <th>Date</th>
+					  <th style="text-align: center;">Application No.</th> 
+					  <th style="text-align: center;">Adhaar Id</th> 
+					  <th style="text-align: center;">Amount Sanctioned</th>
+					  <th style="text-align: center;">Amount Sanctioned in Words</th>
+					  <th style="text-align: center;">Details</th>
+					  <th style="text-align: center;">Date</th>
 					 </tr>
 					 <?php
 					$conn = mysqli_connect("localhost", "root", "", "crescent");
@@ -308,12 +292,27 @@
 					</table>
 
                     
-                  </div>
-                </div>
+                  
+                
 				
 				
 				
 				  </span>
+				  </br>
+				  </br>
+                      </div>
+                      
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <button class="btn btn-primary" type="button">Cancel</button>
+						  <button class="btn btn-primary" type="button" >Check History</button>
+						  <button type="button" onclick="showInput()" class="btn btn-success">New Application</button>
+                        </div>
+                      </div>
+						
+                  </div>
+				 
 				  <span id="demo" style="display:none;">
 				  
 					<div class="x_panel">

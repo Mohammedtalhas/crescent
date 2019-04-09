@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+
+
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -59,7 +61,7 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a  href="index.php"><img src="images/whitehome.png" height="10%" width="10%"/> HOME </a>
+                  <li><a  href="../index.php"><img src="images/whitehome.png" height="10%" width="10%"/> HOME </a>
                   </li>
                   <li><a><img src="images/white-cross.png" height="10%" width="10%"/> MEDICAL AID</a>
                     <ul class="nav child_menu">
@@ -293,5 +295,4 @@
      die();
     }
 ?>
-
 

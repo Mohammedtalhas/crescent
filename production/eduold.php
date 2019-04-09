@@ -1,4 +1,81 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
+<?php 
+	if(isset($_POST['go'])){
+		$host = "localhost";
+        $dbUsername = "root";
+        $dbPassword = "";
+        $dbname = "crescent";
+        //create connection
+        $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
+        if (mysqli_connect_error()) {
+         die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
+        } else {
+			$result= mysqli_query($conn,"SELECT * From edunew Where Adhaar_No = '$_POST[search]'");
+			while($rowval=mysqli_fetch_array($result)){
+				
+				$Adhaar_No = $rowval['Adhaar_No'];
+				$First_Name = $rowval['First_Name'];
+				$Last_Name = $rowval['Last_Name'];
+				$Date_of_birth = $rowval['Date_of_birth'];
+				$Age = $rowval['Age'];
+				$Father_name= $rowval['Father_name'];
+				$Mobile_No= $rowval['Mobile_no'];
+				$Address = $rowval['Address'];
+				$Currently = $rowval['Currently'];
+				$Past_Inst = $rowval['Past_Inst'];
+			}	
+		}
+	} elseif(isset($_POST['adde'])){
+		$Adhaar_No = $_POST['Adhaar_No'];
+							$Application_No = $_POST['Application_No'];
+							$Marks_Obtained = $_POST['Marks_Obtained'];
+							$Course_Applied = $_POST['Course_Applied'];
+							$Course_Duration = $_POST['Course_Duration'];
+							$Instituion_Name= $_POST['Instituion_Name'];
+							$Fees_Structure = $_POST['Fees_Structure'];
+
+							if ( !empty($Adhaar_No) || !empty($Application_No) || !empty($Marks_Obtained) || !empty($Course_Applied) || !empty($Course_Duration) || !empty($Instituion_Name) || !empty($Fees_Structure))  {
+								
+								$host = "localhost";
+								$dbUsername = "root";
+								$dbPassword = "";
+								$dbname = "crescent";
+								//create connection
+								$conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
+								if (mysqli_connect_error()) {
+								 die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
+								} else {
+									
+								 $SELECT = "SELECT Application_No From eduaid Where Application_No = ? Limit 1";
+								 $INSERT = "INSERT Into eduaid (Application_No, Adhaar_No, Marks_Obtained, Course_Applied, Course_Duration, Instituion_Name, Fees_Structure) values(?, ?, ?, ?, ?, ?, ?)";
+								 //Prepare statement
+								 $stmt = $conn->prepare($SELECT);
+								 $stmt->bind_param("s", $Application_No);
+								 $stmt->execute();
+								 $stmt->bind_result($Application_No);
+								 $stmt->store_result();
+								 $rnum = $stmt->num_rows;
+								 if($rnum==0) {
+								  $stmt->close();
+								  $stmt = $conn->prepare($INSERT);
+								  $stmt->bind_param("sssssss", $Application_No, $Adhaar_No, $Marks_Obtained, $Course_Applied , $Course_Duration, $Instituion_Name, $Fees_Structure);
+								  $stmt->execute();
+								  $text="Inserted Successfully";
+								  echo '<script type="text/javascript">alert("Inserted Successfully")</script>';
+								  
+								 } else {
+								  $text="Someone already register using this id";
+								  echo '<script type="text/javascript">alert("'.$text.'")</script>';
+								 }
+								 $stmt->close();
+								 $conn->close();
+								}
+							} else {
+							 echo "All field are required";
+							 die();
+							}
+	}
+	?>
 
 <html lang="en">
   <head>
@@ -70,7 +147,7 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a  href="index.php"><img src="images/whitehome.png" height="10%" width="10%"/> HOME </a>
+                  <li><a  href="../index.php"><img src="images/whitehome.png" height="10%" width="10%"/> HOME </a>
                   </li>
                   <li><a><img src="images/white-cross.png" height="10%" width="10%"/> MEDICAL AID</a>
                     <ul class="nav child_menu">
@@ -128,37 +205,14 @@
               <div class="title_left">
                 <h3>EDUCATIONAL AID</h3>
               </div>
-			<form id="demo-form" method="post" data-parsley-validate class="form-horizontal form-label-left">
+			
               <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for..." name="search" >
                     <span class="input-group-btn">
-                      <button class="btn btn-default" type="submit">Go!</button>
-					  <?php 
-		$host = "localhost";
-        $dbUsername = "root";
-        $dbPassword = "";
-        $dbname = "crescent";
-        //create connection
-        $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
-        if (mysqli_connect_error()) {
-         die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
-        } else {
-			$result= mysqli_query($conn,"SELECT * From edunew Where Applicant_Id = '$_POST[search]'");
-			while($rowval=mysqli_fetch_array($result)){
-				$Applicant_Id = $rowval['Applicant_Id'];
-				$Adhaar_No = $rowval['Adhaar_No'];
-				$First_Name = $rowval['First_Name'];
-				$Last_Name = $rowval['Last_Name'];
-				$Date_of_birth = $rowval['Date_of_birth'];
-				$Age = $rowval['Age'];
-				$Father_name= $rowval['Father_name'];
-				$Mobile_No= $rowval['Mobile_no'];
-				$Address = $rowval['Address'];
-			}	
-		}
-	?>
+                      <button class="btn btn-default" name="go" id="go" type="submit">Go!</button>
+					  
                     </span>
                   </div>
                 </div>
@@ -180,7 +234,7 @@
 
                       <div class="form-group">
                          <div class="form-group">
-                        <div class="col"><label style="margin-left:30px"><strong>Applicant Id:&nbsp;</strong></label><input type="text" name="Applicant_Id" placeholder="Applicant id"value="<?php echo $Applicant_Id;?>" style="padding-bottom:6px;width:200px;"><label style="padding-left:71px;"><strong>Adhaar No.:&nbsp;</strong></label><input type="text" name="Adhaar_No" value="<?php echo $Adhaar_No;?>" style="padding-bottom:6px;width:240px;"></div>
+                        <div class="col"><label style="padding-left:36px;"><strong>Adhaar No.:&nbsp;</strong></label><input type="text" name="Adhaar_No" value="<?php echo $Adhaar_No;?>" style="padding-bottom:6px;width:240px;"></div>
                       </div>
 						<div class="form-group">
                         <div class="col"><label style="margin-left:36px"><strong>First Name:&nbsp;</strong></label><input type="text" name="First_Name" value="<?php echo $First_Name;?>" style="padding-bottom:6px;width:180px;"><label style="padding-left:75px;"><strong>Last Name:&nbsp;</strong></label><input type="text" name="Last_Name" value="<?php echo $Last_Name;?>" style="padding-bottom:6px;width:180px;"><label style="padding-left:70px;"><strong>Date of birth:&nbsp;</strong></label><input type="text" name="Date_of_birth" value="<?php echo $Date_of_birth;?>" style="padding-bottom:6px;width:128px;"><label style="margin-left:20px"><strong>Age:&nbsp;</strong></label><input type="number" name="Age" value="<?php echo $Age;?>" style="padding-bottom:6px;width:40px;"></div>
@@ -188,15 +242,64 @@
 					<div class="form-group">
                         <div class="col"><label style="margin-left:26px"><strong>Father Name:&nbsp;</strong></label><input type="text" name="Father_name" value="<?php echo $Father_name;?>" style="padding-bottom:6px;width:200px;"><label style="padding-left:55px;"><strong>Mobile No.:&nbsp;</strong></label><input type="text" name="Mobile_No" value="<?php echo $Mobile_No;?>" style="padding-bottom:6px;width:200px;"><label style="padding-left:50px;"><strong>Address:&nbsp;</strong></label><input type="text" name="Address" value="<?php echo $Address;?>" style="padding-bottom:6px;width:230px;"></div>
 					</div>
+					<div class="form-group">					
+					<div class="col"><label style="margin-left:16px"><strong>Currently Studied:&nbsp;</strong></label><input type="text" name="Currently" value="<?php echo $Currently;?>" style="padding-bottom:6px;width:180px;"><label style="padding-left:35px;"><strong>Institution Name:&nbsp;</strong></label><input type="text" name="Past_Inst" value="<?php echo $Past_Inst;?>" style="padding-bottom:6px;width:299px;">
+					</div>
+					<span id="demo1" style="display:block;">
+				  
+					
+                    <br />
+                    
+
+					<table border="5" style="border-collapse: collapse;width: 100%;color: #000000;font-family: monospace;font-size: 20px;text-align:center;">
+					 <tr>
+					  <th style="text-align: center;">Application No.</th> 
+					  <th style="text-align: center;">Adhaar Id</th> 
+					  <th style="text-align: center;">Course </th>
+					  <th style="text-align: center;">Course Duration</th>
+					  <th style="text-align: center;">Fees Structure</th>
+					  
+					 </tr>
+					 <?php
+					$conn = mysqli_connect("localhost", "root", "", "crescent");
+					  // Check connection
+					  if ($conn->connect_error) {
+					   die("Connection failed: " . $conn->connect_error);
+					  } 
+					  $sql = "SELECT eduaid.Application_No, eduaid.Adhaar_No, eduaid.Course_Applied, eduaid.Course_Duration, eduaid.Fees_Structure
+					FROM eduaid
+					INNER JOIN edunew ON eduaid.Adhaar_No=edunew.Adhaar_No Where eduaid.Adhaar_No  = '$Adhaar_No' ;
+
+					";
+					  $result = $conn->query($sql);
+					  if ($result->num_rows > 0) {
+					   
+					   while($row = $result->fetch_assoc()) {
+						echo "<tr><td>" . $row["Application_No"]. "</td><td>" . $row["Adhaar_No"] . "</td><td>". $row["Course_Applied"]. "</td><td>" . $row["Course_Duration"] . "</td><td>" . $row["Fees_Structure"] . "</td></tr>";
+					}
+					echo "</table>";
+					} else { echo ""; }
+					$conn->close();
+					?>
+					</table>
+
+                    
+                  
+                
 				
-                      </div>
+				
+				
+				  </span>
+				  </br>
+				  </br>
+                      
                       </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="button">Cancel</button>
 						  <button class="btn btn-primary" type="reset">Reset</button>
-						  </form>
+						 
                           <button type="button" onclick="showInput()" class="btn btn-success">New Application</button>
                         </div>
                       </div>
@@ -212,13 +315,13 @@
 					<div>
 					<div>
 					<div class="form-group">
-					<label style="padding-left:44px;"><strong>Application No.:&nbsp;</strong></label><input type="text" style="padding-bottom:6px;width:200px;">
+					<label style="padding-left:44px;"><strong>Application No.:&nbsp;</strong></label><input name="Application_No" type="text" style="padding-bottom:6px;width:200px;">
 					</div>
 					<div class="form-group">
-                        <div class="col"><label style="margin-left:37px"><strong>Marks Obtained:&nbsp;</strong></label><input type="text" style="padding-bottom:6px;width:200px;"><label style="padding-left:45px;"><strong>Course Applied:&nbsp;</strong></label><input type="text" style="padding-bottom:6px;width:200px;"><label style="padding-left:50px;"><strong>course Duration&nbsp;</strong></label><input type="text" style="padding-bottom:6px;width:100px;"></div>
+                        <div class="col"><label style="margin-left:37px"><strong>Marks Obtained:&nbsp;</strong></label><input name="Marks_Obtained" type="text" style="padding-bottom:6px;width:200px;"><label style="padding-left:45px;"><strong>Course Applied:&nbsp;</strong></label><input name="Course_Applied" type="text" style="padding-bottom:6px;width:200px;"><label style="padding-left:50px;"><strong>Course Duration&nbsp;</strong></label><input name="Course_Duration" type="text" style="padding-bottom:6px;width:100px;"></div>
 					</div>
 					<div class="form-group">
-                        <div class="col"><label style="margin-left:33px"><strong>Institution Name:&nbsp;</strong></label><input type="text" style="padding-bottom:6px;width:350px;"><label style="padding-left:75px;"><strong>Fee Structure:&nbsp;</strong></label><input type="text" style="padding-bottom:6px;width:100px;"></div>
+                        <div class="col"><label style="margin-left:33px"><strong>Institution Name:&nbsp;</strong></label><input name="Instituion_Name" type="text" style="padding-bottom:6px;width:350px;"><label style="padding-left:75px;"><strong>Fee Structure:&nbsp;</strong></label><input type="text" name="Fees_Structure" style="padding-bottom:6px;width:100px;"></div>
 					</div>
                       </div>
                       </div>
@@ -228,7 +331,7 @@
                           <button class="btn btn-primary" type="button">Cancel</button>
 						  <button class="btn btn-primary" type="reset">Reset</button>
 						
-                          <button type="submit" class="btn btn-success">Submit</button>
+                          <button type="submit" name="adde" id="adde" class="btn btn-success">Submit</button>
                         </div>
                       </div>
 
