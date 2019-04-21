@@ -185,7 +185,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>MEDICAL AID</h3>
+                <h3>JEWEL LOAN</h3>
               </div>
 
              
@@ -209,7 +209,7 @@
                         <div class="col">
 						  
 						  <label style="margin-left:45px;"><strong>Adhaar No.:&nbsp;</strong></label>
-						  <input type="text" name="aadhar_id" maxlength="12" style="padding-bottom:6px;width:200px;">
+						  <input type="text" name="aadhar_id" style="padding-bottom:6px;width:200px;">
 						</div>
                       </div>
 						<div class="form-group">
@@ -219,18 +219,16 @@
 						 <label style="padding-left:75px;"><strong>Last Name:&nbsp;</strong></label>
  
  						 <input type="text" name="Last_Name" style="padding-bottom:6px;width:200px;"> 
-						 <label style="padding-left:70px;"><strong>Date of birth:&nbsp;</strong></label>
-						 <input type="date"  name="Date_of_birth" style="padding-bottom:6px;width:128px;">
-						</div>
+						 <label style="margin-left:50px"><strong>Mobile No.:&nbsp;</strong></label>
+					<input type="text" name="Mobile_No" style="padding-bottom:6px;width:200px;"></div>
 					    </div>
                     </div>
                       <div class="form-group">
                         <div class="col"></div>
 					</div>
-						<div class="col"><label style="margin-left:50px"><strong>Mobile No.:&nbsp;</strong></label>
-					<input type="text" name="Mobile_No" style="padding-bottom:6px;width:200px;">
-					<label style="padding-left:90px;"><strong>Address:&nbsp;</strong></label>
-					<input type="text" name="Address" style="padding-bottom:6px;width:200px;">
+					<div class="col">
+					<label style="padding-left:65px;"><strong>Address:&nbsp;</strong></label>
+					<input type="text" name="Address" style="padding-bottom:6px;width:350px;">
 					<label style="padding-left:80px;"><strong>Town/City:*&nbsp;</strong></label>
 					<input type="text" name="Town_City" style="padding-bottom:6px;width:130px;"></div>
 					</div>
@@ -316,7 +314,7 @@
     $First_Name = $_POST['First_Name'];
     $Last_Name = $_POST['Last_Name'];
     $Date_of_birth = $_POST['Date_of_birth'];
-    $Age = floor((time() - strtotime($Date_of_birth)) / 31556926);
+    $Age = $_POST['Age'];
 	$Mobile_No= $_POST['Mobile_No'];
 	$Address = $_POST['Address'];
 	$Town_City = $_POST['Town_City'];

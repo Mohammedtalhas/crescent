@@ -39,7 +39,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><img src="images/crescent.jpg" height="45%" width="15%"/> <span>CRESENT</span></a>
+              <a href="../index.php" class="site_title"><img src="images/crescent.jpg" height="45%" width="15%"/> <span>CRESENT</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -62,18 +62,24 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                  <li><a  href="../index.php"><img src="images/whitehome.png" height="10%" width="10%"/> HOME </a>
+                  <li><a  href="../main.php"><img src="images/whitehome.png" height="10%" width="10%"/> HOME </a>
                   </li>
                   <li><a><img src="images/white-cross.png" height="10%" width="10%"/> MEDICAL AID</a>
                     <ul class="nav child_menu">
-                      <li><a href="medi.php">NEW FORM</a></li>
-                      <li><a href="mediold.php">SEARCH FORM</a></li>
+                      <li><a href="medi.php">NEW USER</a></li>
+                      <li><a href="mediold.php">EXISTING USER</a></li>
                     </ul>
                   </li>
 				   <li><a><img src="images/edu.png" height="10%" width="10%"/> EDUCATIONAL AID</a>
                     <ul class="nav child_menu">
-                      <li><a href="edunew.php">NEW FORM</a></li>
-                      <li><a href="eduold.php">SEARCH FORM</a></li>
+                      <li><a href="edunew.php">NEW USER</a></li>
+                      <li><a href="eduold.php">EXISTING USER</a></li>
+                    </ul>
+                  </li>
+				  <li><a><img src="images/jewel.png" height="10%" width="10%"/> JEWEL LOAN</a>
+                    <ul class="nav child_menu">
+                      <li><a href="jewelloan.php">NEW USER</a></li>
+                      <li><a href="jewelloanold.php">EXISTING USER</a></li>
                     </ul>
                   </li>
               </div>
@@ -101,10 +107,73 @@
                     <img src="images/admin.png" alt="">ADMIN
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="login.html"> Log Out</a></li>
+                    <li><a href="../index.php"> Log Out</a></li>
                   </ul>
                 </li>
-
+				<li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
                 
               </ul>
             </nav>
@@ -147,8 +216,6 @@
 						<input type="text" name="Last_Name" style="padding-bottom:6px;width:175px;">
 						<label style="padding-left:50px;"><strong>Date of birth:&nbsp;</strong></label>
 						<input type="date" name="Date_of_birth" style="padding-bottom:6px;width:128px;">
-						<label style="margin-left:40px"><strong>Age:&nbsp;</strong></label>
-						<input type="number" name="Age" style="padding-bottom:6px;width:40px;">
 					  </div>
 					</div>
 					<div class="form-group">
@@ -159,13 +226,16 @@
 						<label style="padding-left:74px;"><strong>Address:&nbsp;</strong></label>
 						<input type="text" name="Address" style="padding-bottom:6px;width:210px;"></div>
 					</div>
-					<div class="form-group">
-					
-					<div class="col"><label style="margin-left:6px"><strong>Currently Studied:&nbsp;</strong></label><input type="text" name="Currently" style="padding-bottom:6px;width:180px;"><label style="padding-left:35px;"><strong>Institution Name:&nbsp;</strong></label><input type="text" name="Past_Inst" style="padding-bottom:6px;width:299px;">
-					</div>
-                      </div>
                       <div class="form-group">
-                        <div class="col"></div>
+                        <div class="col"><div class="col"><label style="margin-left:27px"><strong>Institution Name:&nbsp;</strong></label>
+						<input name="Instituion_Name" type="text" style="padding-bottom:6px;width:270px;">
+						<label style="padding-left:35px;"><strong>Course Applied:&nbsp;</strong></label>
+						<input type="text" name="Course_Applied" style="padding-bottom:6px;width:70px;">
+						<label style="padding-left:30px;"><strong>Course Duration:&nbsp;</strong></label>
+						<input type="text" name="Course_Duration" style="padding-bottom:6px;width:70px;">
+						<label style="padding-left:35px;"><strong>Fee Structure:&nbsp;</strong></label>
+						<input type="text" name="Fees_Structure" style="padding-bottom:6px;width:80px;">
+                    </div></div>
 					</div>
                       </div>
                       <div class="ln_solid"></div>
@@ -247,13 +317,15 @@
     $First_Name = $_POST['First_Name'];
     $Last_Name = $_POST['Last_Name'];
     $Date_of_birth = $_POST['Date_of_birth'];
-    $Age = $_POST['Age'];
+    $Age = floor((time() - strtotime($Date_of_birth)) / 31556926);;
 	$Father_name= $_POST['Father_name'];
 	$Mobile_No= $_POST['Mobile_no'];
 	$Address = $_POST['Address'];
-	$Currently = $_POST['Currently'];
-	$Past_Inst = $_POST['Past_Inst'];
-    if ( !empty($Adhaar_No) || !empty($First_Name) || !empty($Last_Name) || !empty($Date_of_birth) || !empty($Age) || !empty($Father_name) || !empty($Mobile_No) || !empty($Address) || !empty($Currently) || !empty($Past_Inst))  {
+	$Institution = $_POST['Instituion_Name'];
+	$Course_Applied = $_POST['Course_Applied'];
+	$Course_Duration = $_POST['Course_Duration'];
+	$Fees_Structure = $_POST['Fees_Structure'];
+    if ( !empty($Adhaar_No) || !empty($First_Name) || !empty($Last_Name) || !empty($Date_of_birth) || !empty($Father_name) || !empty($Mobile_No) || !empty($Address) || !empty($Institution) || !empty($Course_Applied) || !empty($Course_Duration) || !empty($Fees_Structure))  {
 		$host = "localhost";
         $dbUsername = "root";
         $dbPassword = "";
@@ -264,7 +336,7 @@
          die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
         } else {
          $SELECT = "SELECT Adhaar_No From edunew Where Adhaar_No = ? Limit 1";
-         $INSERT = "INSERT Into edunew (Adhaar_No, First_Name, Last_Name, Date_of_birth, Age, Father_name, Mobile_No, Address, Currently, Past_Inst) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+         $INSERT = "INSERT Into edunew (Adhaar_No, First_Name, Last_Name, Date_of_birth, Age, Father_name, Mobile_No, Address, Institution, Course_Applied, Course_Duration, Fees_Structure) values('$Adhaar_No', '$First_Name', '$Last_Name', '$Date_of_birth', '$Age', '$Father_name', '$Mobile_No', '$Address', '$Institution', '$Course_Applied', '$Course_Duration', '$Fees_Structure' )";
          //Prepare statement
          $stmt = $conn->prepare($SELECT);
          $stmt->bind_param("i", $Adhaar_No);
@@ -275,7 +347,7 @@
          if ($rnum==0) {
           $stmt->close();
           $stmt = $conn->prepare($INSERT);
-          $stmt->bind_param("ssssssssss", $Adhaar_No, $First_Name, $Last_Name , $Date_of_birth, $Age, $Father_name, $Mobile_No, $Address, $Currently, $Past_Inst);
+          
           $stmt->execute();
 		  $text="Inserted Successfully";
 		  echo '<script type="text/javascript">alert("'.$text.'")</script>';
