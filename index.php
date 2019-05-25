@@ -1,3 +1,65 @@
+<?php 
+session_start();
+define('mai',TRUE);
+require_once('production/includes/config.php');
+
+if(isset($_POST['login']))
+{    
+    
+	if(!empty($_POST['username']) && !empty($_POST['password']))
+	{
+		$username 		= $_POST['username'];
+		$password 	= $_POST['password'];
+		
+		
+		
+		$sql = "select * from users where username = '".$username."' and password = '".$password."'";
+		$rs = mysqli_query($mysqli,$sql);
+		$getNumRows = mysqli_num_rows($rs);
+		
+		if($getNumRows == 1)
+		{
+			$getUserRow = mysqli_fetch_assoc($rs);
+			unset($getUserRow['password']);
+			
+			$_SESSION = $getUserRow;
+						
+			header('location:main.php?id=true');
+			exit;
+		}
+		else
+		{
+			$errorMsg = "Wrong username or password";
+		}
+	}
+}
+
+if(isset($_GET['logout']) && $_GET['logout'] == true)
+{
+	session_destroy();
+	header("location:index.php");
+	exit;
+}
+
+
+if(isset($_GET['lmsg']) && $_GET['lmsg'] == true)
+{
+	$errorMsg = "Login required to access dashboard";
+}
+
+if (isset($_SESSION['previous'])) {
+   if (basename($_SERVER['PHP_SELF']) != $_SESSION['previous']) {
+        session_destroy();
+        ### or alternatively, you can use this for specific variables:
+        ### unset($_SESSION['varname']);
+   }
+}
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -33,20 +95,20 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 			
               <h1>Login Form</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input type="text" class="form-control" placeholder="Username" name="username" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input type="password" class="form-control" placeholder="Password" name="password" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="main.php">Log in</a>
+				<button class="btn btn-primary btn-block" type="submit" name="login">Login</button>
                 <a class="reset_pass" href="#">Lost your password?</a>
               </div>
-
+				</form>
               <div class="clearfix"></div>
 
             
@@ -59,7 +121,7 @@
                   <p>Copyright © <a href="https://juntossoft.com"><b>juntos software solution.</b></a><br>
 				  All rights reserved.</p>
                 </div>
-            </form>
+            
           </section>
         </div>
 

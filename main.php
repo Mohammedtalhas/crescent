@@ -1,3 +1,23 @@
+<?php 
+
+	session_start();
+	if(!isset($_GET['id'])){
+     if(!defined('mai')){
+	exit('sorry..!');}}
+		
+	if(!isset($_SESSION['id'],$_SESSION['user_role_id']))
+	{
+		header('location:index.php?lmsg=true');
+		exit;
+	}
+$_SESSION['previous'] = basename($_SERVER['PHP_SELF']);
+	require_once('production/includes/config.php');
+	require_once('production/sidebar.php'); 
+	
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,152 +51,12 @@
   </head>
 
   <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="index.php" class="site_title"><img src="production/images/crescent.jpg" height="45%" width="15%"/> <span>CRESENT</span></a>
-            </div>
-
-            <div class="clearfix"></div>
-
-            <!-- menu profile quick info -->
-            <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="production/images/admin.png" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>ADMIN</h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
-
-            <br />
-
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <ul class="nav side-menu">
-                  <li><a  href="main.php"><img src="production/images/whitehome.png" height="10%" width="10%"/> HOME </a>
-                  </li>
-                  <li><a><img src="production/images/white-cross.png" height="10%" width="10%"/> MEDICAL AID</a>
-                    <ul class="nav child_menu">
-                      <li><a href="production/medi.php">NEW USER</a></li>
-                      <li><a href="production/mediold.php">EXISTING USER</a></li>
-                    </ul>
-                  </li>
-				   <li><a><img src="production/images/edu.png" height="10%" width="10%"/> EDUCATIONAL AID</a>
-                    <ul class="nav child_menu">
-                      <li><a href="production/edunew.php">NEW USER</a></li>
-                      <li><a href="production/eduold.php">EXISTING USER</a></li>
-                    </ul>
-                  </li>
-				  <li><a><img src="production/images/jewel.png" height="10%" width="10%"/> JEWEL LOAN</a>
-                    <ul class="nav child_menu">
-                      <li><a href="production/jewelloan.php">NEW USER</a></li>
-                      <li><a href="production/jewelloanold.php">EXISTING USER</a></li>
-                    </ul>
-                  </li>
-              </div>
-
-            </div>
-            <!-- /sidebar menu -->
-
-            <!-- /menu footer buttons -->
+     <div class="container body">
+	<div class="main_container">
         
-        
-            <!-- /menu footer buttons -->
-          </div>
-        </div>
 
         <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><img src="production/images/bars.png" height="30%" width="30%"/></a>
-              </div>
-
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="production/images/admin.png" alt="">ADMIN
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="index.php"> Log Out</a></li>
-                  </ul>
-                </li>
-				<li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-                
-              </ul>
-            </nav>
-          </div>
-        </div>
+			<?php require_once('production/header.php'); ?>
         <!-- /top navigation -->
 
         <!-- page content -->
@@ -195,14 +75,9 @@
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Copyright ©  <a href="https://juntossoft.com">juntos software solution.</a> All rights reserved. 
-          </div>
-          <div class="clearfix">
-		  </div>
-        </footer>
+        <?php require_once('production/footer.php'); ?>	
         <!-- /footer content -->
+		
       </div>
     </div>
 
@@ -246,6 +121,6 @@
 
     <!-- Custom Theme Scripts -->
     <script src="build/js/custom.min.js"></script>
-	
+
   </body>
 </html>
